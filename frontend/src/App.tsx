@@ -6,17 +6,24 @@ import EventDetailPage from './pages/EventDetailPage';
 import NewEventPage from './pages/NewEventPage';
 import EditEventPage from './pages/EditEventPage';
 import RootLayout from './pages/RooyLayout';
+import EventsRootLayout from './pages/EventsRootLayout';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <RootLayout />,
 		children: [
-			{index: true, element: <HomePage />},
-			{ path: '/events', element: <EventsPage /> },
-			{ path: '/events/:eventID', element: <EventDetailPage /> },
-			{ path: 'events/new', element: <NewEventPage /> },
-			{ path: 'events/:eventID/edit', element: <EditEventPage /> },
+			{ index: true, element: <HomePage /> },
+			{
+				path: 'events',
+				element: <EventsRootLayout />,
+				children: [
+					{ index: true, element: <EventsPage /> },
+					{ path: ':eventID', element: <EventDetailPage /> },
+					{ path: 'new', element: <NewEventPage /> },
+					{ path: ':eventID/edit', element: <EditEventPage /> },
+				],
+			},
 		],
 	},
 ]);
