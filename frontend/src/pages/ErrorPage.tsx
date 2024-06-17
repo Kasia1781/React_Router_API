@@ -1,3 +1,9 @@
+import PageContent from '../components/PageContent';
+
 export default function ErroePage() {
-	return <h1>An error occured!</h1>;
+	return (
+		<PageContent title='An error occured!'>
+			<p>Something went wrong!</p>
+		</PageContent>
+	);
 }
