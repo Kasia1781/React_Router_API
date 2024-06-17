@@ -8,11 +8,13 @@ import EditEventPage from './pages/EditEventPage';
 import RootLayout from './pages/RooyLayout';
 import EventsRootLayout from './pages/EventsRootLayout';
 import { loader as eventsLoader } from './pages/EventsPage';
+import ErroePage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <RootLayout />,
+		errorElement: <ErroePage />,
 		children: [
 			{ index: true, element: <HomePage /> },
 			{

@@ -10,7 +10,7 @@ type EventsData = {
 };
 
 export default function EventsPage() {
-	const events = useLoaderData() as EventsData;
+	const events = useLoaderData() as EventsData[];
 
 	return (
 		<>
@@ -21,11 +21,11 @@ export default function EventsPage() {
 
 export async function loader() {
 	const response = await fetch('http://localhost:8080/events');
-
+	//obsługa błędów
 	if (!response.ok) {
-		//...
+		//..
 	} else {
 		const resData = await response.json();
-		return resData.events;
+		return resData.events as EventsData[];
 	}
 }
