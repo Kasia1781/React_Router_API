@@ -20,7 +20,7 @@ export default function EventsPage() {
 }
 
 export async function loader() {
-	const response = await fetch('http://localhost:8080/eventss');
+	const response = await fetch('http://localhost:8080/events');
 	//obsługa błędu ze statusem 500
 	if (!response.ok) {
 		throw json(
