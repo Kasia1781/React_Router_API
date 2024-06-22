@@ -11,7 +11,6 @@ type EventData = {
 
 export default function EventDetailPage() {
 	const data = useRouteLoaderData('event-detail') as { event: EventData };
-	console.log(data);
 
 	return (
 		<>
@@ -23,7 +22,6 @@ export default function EventDetailPage() {
 //funkcja ładująca do pobierania szczegółów pojedyczego event
 export async function loader({ params }: { eventId: string }) {
 	const id = params.eventId;
-	console.log(id);
 
 	const response = await fetch('http://localhost:8080/events/' + id);
 	//console.log(response);
