@@ -8,13 +8,14 @@ import EditEventPage from './pages/EditEventPage';
 import RootLayout from './pages/RooyLayout';
 import EventsRootLayout from './pages/EventsRootLayout';
 import { loader as eventsLoader } from './pages/EventsPage';
-import ErroePage from './pages/ErrorPage';
+import ErrorPage from './pages/ErrorPage';
+import { loader as eventDetailLoader } from './pages/EventDetailPage';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <RootLayout />,
-		errorElement: <ErroePage />,
+		errorElement: <ErrorPage />,
 		children: [
 			{ index: true, element: <HomePage /> },
 			{
@@ -22,9 +23,19 @@ const router = createBrowserRouter([
 				element: <EventsRootLayout />,
 				children: [
 					{ index: true, element: <EventsPage />, loader: eventsLoader },
-					{ path: ':eventID', element: <EventDetailPage /> },
+					{
+						path: ':eventId',
+						id: 'event-detail',
+						loader: eventDetailLoader,
+						children: [
+							{
+								index: true,
+								element: <EventDetailPage />,
+							},
+							{ path: 'edit', element: <EditEventPage /> },
+						],
+					},
 					{ path: 'new', element: <NewEventPage /> },
-					{ path: ':eventID/edit', element: <EditEventPage /> },
 				],
 			},
 		],

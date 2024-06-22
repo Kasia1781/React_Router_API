@@ -3,7 +3,7 @@ import PageContent from '../components/PageContent';
 import MainNavigation from '../components/MainNavigation';
 
 //customowy komponent w którym tworzymy komunikaty dla błedów 404 i 500.
-export default function ErroePage() {
+export default function ErrorPage() {
 	const error = useRouteError() as any;
 
 	let title = 'An error occured!';
