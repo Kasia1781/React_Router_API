@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import classes from './EventItem.module.css';
+import { useSubmit } from 'react-router-dom';
 
 type EventProps = {
 	event: {
@@ -13,6 +14,8 @@ type EventProps = {
 };
 
 export default function EventItem({ event }: EventProps) {
+	const submit = useSubmit();
+
 	function startDeleteHandler() {
 		const proceed = window.confirm('Are you sure?'); //dostajemy true lub false
 
