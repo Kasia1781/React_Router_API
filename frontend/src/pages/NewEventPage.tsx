@@ -33,6 +33,10 @@ export async function action({ request, params }) {
 		);
 	}
 
+	if (response.status === 422) {
+		return response;
+	}
+
 	//przekierowanie na stronę /events
 	return redirect('/events');
 }
