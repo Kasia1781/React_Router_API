@@ -1,10 +1,9 @@
 import classes from './EventForm.module.css';
-import { useNavigate, useNavigation } from 'react-router-dom';
+import { useNavigate, useNavigation, redirect, json } from 'react-router-dom';
 import { Form } from 'react-router-dom';
 
 export default function EventForm({ method, event }) {
 	const navigation = useNavigation();
-	console.log(navigation);
 
 	const isSubmitting = navigation.state === 'submitting';
 
@@ -14,7 +13,7 @@ export default function EventForm({ method, event }) {
 	}
 
 	return (
-		<Form method='post' className={classes.form}>
+		<Form method={method} className={classes.form}>
 			<p>
 				<label htmlFor='title'>Title</label>
 				<input
@@ -65,4 +64,39 @@ export default function EventForm({ method, event }) {
 			</div>
 		</Form>
 	);
+}
+
+//funkcja odowiedzialna za wysyłanie danych na backend: tworzenie i edytowanie wydarzenia
+export async function action({ request, params }) {
+	const data = await request.formData();
+
+	const eventData = {
+		title: data.get('title'),
+		image: data.get('image'),
+		date: data.get('date'),
+		description: data.get('description'),
+	};
+
+	const response = await fetch('http://localhost:8080/events', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(eventData),
+	});
+
+	if (!response.ok) {
+		throw json(
+			{ message: 'Could not save event.' },
+			{
+				status: 500,
+			}
+		);
+	}
+	if (response.status === 422) {
+		return response;
+	}
+
+	//przekierowanie na stronę /events
+	return redirect('/events');
 }
