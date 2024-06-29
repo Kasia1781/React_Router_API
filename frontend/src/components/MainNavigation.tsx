@@ -21,6 +21,13 @@ export default function MainNavigation() {
 							Events
 						</NavLink>
 					</li>
+					<li>
+						<NavLink
+							to='/newsletter'
+							className={({ isActive }) => (isActive ? classes.active : '')}>
+							Newsletter
+						</NavLink>
+					</li>
 				</ul>
 			</nav>
 		</header>
