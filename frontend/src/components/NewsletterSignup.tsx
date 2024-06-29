@@ -1,8 +1,18 @@
 import classes from './NewsletterSignup.module.css';
 import { useFetcher } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function NewsletterSignup() {
 	const fetcher = useFetcher();
+	const { data, state } = fetcher;
+
+	//idle oznacza, że nie wykonujemy już action ani loadera
+	useEffect(() => {
+		if (state === 'idle' && data && data.message) {
+			window.alert(data.message);
+		}
+	}, [data, state]);
+
 	return (
 		<fetcher.Form
 			method='post'
